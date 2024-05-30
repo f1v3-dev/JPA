@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Parent {
 
     @Id
@@ -17,4 +19,10 @@ public class Parent {
     private Long id;
 
     private String name;
+
+    @Builder
+    public Parent(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
