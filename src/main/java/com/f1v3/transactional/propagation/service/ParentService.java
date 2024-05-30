@@ -14,7 +14,7 @@ public class ParentService {
     private final ChildService childService;
 
     @Transactional
-    public void save() {
+    public void save1() {
         Parent parent = Parent.builder()
                 .name("new Parent")
                 .build();
