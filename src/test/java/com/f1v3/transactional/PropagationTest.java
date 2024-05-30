@@ -31,7 +31,7 @@ class PropagationTest {
     void requiresNewTest() {
 
         // given
-        parentService.save1();
+        parentService.savePropagation();
 
         /**
          * parent의 정보는 DB에 저장되어야 하고,

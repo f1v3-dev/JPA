@@ -1,10 +1,11 @@
 # Spring - @Transactional Test
 
-## @Transactional(propagation = REQUIRES_NEW)의 오해
-
 ### 테스트 환경
+
 - Parent
 - Child
+
+## @Transactional(propagation = REQUIRES_NEW)의 오해
 
 ### 테스트 방법
 
@@ -26,4 +27,24 @@
 
 ex. try-catch 문을 사용,,
 
+## @Transactional(readOnly = true)의 오해
+
+@Transactional(readOnly = true) 옵션을 주고, save를 호출한다면?
+
+### 테스트 방법
+
+- ParentService - @Transactional(readOnly = true) 옵션 설정
+- ParentRepository.save() 호출
+
+### 테스트 결과
+
+- 에러가 발생하지 않음.
+- 또한, ParentRepository.count() 호출 시 저장된 것을 확인할 수 있음.
+- JpaRepository의 save() 메서드는 SimpleJpaRepository의 save() 메서드를 호출
+
+_SimpleJpaRepository - save_
+![readOnly.png](img/readOnly.png)
+
+- 위의 코드를 보면 `@Transaction` 어노테이션이 별도로 설정되어있는 것을 볼 수 있음.
+- 따라서, `@Transactional(readOnly = true)` 옵션을 주더라도, `save()` 메서드는 `@Transactional` 옵션을 따르게 됨.
 
