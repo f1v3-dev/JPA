@@ -48,3 +48,45 @@ _SimpleJpaRepository - save_
 - 위의 코드를 보면 `@Transaction` 어노테이션이 별도로 설정되어있는 것을 볼 수 있음.
 - 따라서, `@Transactional(readOnly = true)` 옵션을 주더라도, `save()` 메서드는 `@Transactional` 옵션을 따르게 됨.
 
+## @Transactional - Isolation
+
+```java
+package org.springframework.transaction.annotation;
+
+import org.springframework.transaction.TransactionDefinition;
+
+public enum Isolation {
+
+    DEFAULT(TransactionDefinition.ISOLATION_DEFAULT),
+
+    READ_UNCOMMITTED(TransactionDefinition.ISOLATION_READ_UNCOMMITTED),
+
+    READ_COMMITTED(TransactionDefinition.ISOLATION_READ_COMMITTED),
+
+    REPEATABLE_READ(TransactionDefinition.ISOLATION_REPEATABLE_READ),
+
+    SERIALIZABLE(TransactionDefinition.ISOLATION_SERIALIZABLE);
+
+    private final int value;
+
+
+    Isolation(int value) {
+        this.value = value;
+    }
+
+    public int value() {
+        return this.value;
+    }
+
+}
+
+```
+
+
+# JPA - N+1
+
+> N+1이 @OneToOne 관계에서도 발생한다?
+
+### 읽어보기
+- [Spring boot :: JPA에서 OneToOne 관계 N+1 문제 정리](https://wave1994.tistory.com/156)
+- [OneToOne 관계는 과연 지연로딩이 되는가?](https://velog.io/@yhlee9753/OneToOne-%EA%B4%80%EA%B3%84%EB%8A%94-%EA%B3%BC%EC%97%B0-%EC%A7%80%EC%97%B0%EB%A1%9C%EB%94%A9%EC%9D%B4-%EB%90%98%EB%8A%94%EA%B0%80)
