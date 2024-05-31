@@ -109,6 +109,7 @@ public enum Isolation {
 - 또한, JPA 구현체는 연관 관계 Entity에 **Null** 또는 **프록시 객체**가 할당되어야 한다.
 
 _아래는 테이블의 구조_
+
 ![locker_member.png](img/locker_member.png)
 
 - locker 테이블 컬럼에 Member에 관한 정보가 존재하지 않는다.
