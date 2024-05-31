@@ -1,4 +1,4 @@
-package com.f1v3.jpa.propagation.domain;
+package com.f1v3.jpa.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Child {
+public class Parent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Child {
     private String name;
 
     @Builder
-    public Child(Long id, String name) {
+    public Parent(Long id, String name) {
         this.id = id;
         this.name = name;
     }
