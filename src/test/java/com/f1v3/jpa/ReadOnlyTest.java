@@ -1,7 +1,7 @@
-package com.f1v3.transactional;
+package com.f1v3.jpa;
 
-import com.f1v3.transactional.propagation.repository.ParentRepository;
-import com.f1v3.transactional.propagation.service.ParentService;
+import com.f1v3.jpa.propagation.repository.ParentRepository;
+import com.f1v3.jpa.propagation.service.ParentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.f1v3.transactional.propagation.domain;
+package com.f1v3.jpa.propagation.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
