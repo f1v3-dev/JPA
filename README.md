@@ -82,11 +82,36 @@ public enum Isolation {
 
 ```
 
-
 # JPA - N+1
 
 > N+1이 @OneToOne 관계에서도 발생한다?
 
 ### 읽어보기
+
 - [Spring boot :: JPA에서 OneToOne 관계 N+1 문제 정리](https://wave1994.tistory.com/156)
 - [OneToOne 관계는 과연 지연로딩이 되는가?](https://velog.io/@yhlee9753/OneToOne-%EA%B4%80%EA%B3%84%EB%8A%94-%EA%B3%BC%EC%97%B0-%EC%A7%80%EC%97%B0%EB%A1%9C%EB%94%A9%EC%9D%B4-%EB%90%98%EB%8A%94%EA%B0%80)
+- [JPA @OneToOne은 FetchType.LAZY가 안 먹힐 수 있다?](https://jeong-pro.tistory.com/249)
+
+## 원인
+
+- `@OneToOne` 관계의 Default FetchType은 EAGER
+- But, LAZY로 설정해주어도 EAGER로 동작하는 예외적인 상황이 발생
+- 단방향 `@OneToOne` 관계에서는 문제가 없지만, **양방향** @OneToOne 관계에서는 무조건 EAGER로 동작한다.
+
+> _정확히 얘기하자면_  
+> OneToOne 양방향 연관 관계에서 연관 관계 주인이 아닌 엔티티를 조회할 때, LAZY 전략이 무시되고 EAGER 전략으로 동작한다.
+
+## 이유
+
+![JPA_Proxy.png](img/JPA_Proxy.png)
+
+- fetchType.LAZY로 동작하기 위해서는 JPA 구현체에서 `Proxy` 를 만들어 줘야 한다.
+- 또한, JPA 구현체는 연관 관계 Entity에 **Null** 또는 **프록시 객체**가 할당되어야 한다.
+
+_아래는 테이블의 구조_
+![locker_member.png](img/locker_member.png)
+
+- locker 테이블 컬럼에 Member에 관한 정보가 존재하지 않는다.
+- 따라서, Member Entity에 대한 정보가 없는 상태에서 `@OneToOne` 양방향 관계인 상태
+- 이러한 상황에서 Member Entity를 조회하게 되면, JPA 구현체는 Member Entity에 대한 정보가 없기 때문에 **프록시 객체**를 만들어 줄 수 없다.
+
