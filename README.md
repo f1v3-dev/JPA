@@ -116,3 +116,137 @@ _아래는 테이블의 구조_
 - 따라서, Member Entity에 대한 정보가 없는 상태에서 `@OneToOne` 양방향 관계인 상태
 - 이러한 상황에서 Member Entity를 조회하게 되면, JPA 구현체는 Member Entity에 대한 정보가 없기 때문에 **프록시 객체**를 만들어 줄 수 없다.
 
+
+# Spring JPA 사실과 오해 - NHN FORWARD (신동민 개발자님)
+
+> link : YOUTUBE - NHN Cloud 
+
+## Contents
+1. 연관관계 매핑
+2. Spring Data JPA Repository
+
+### 1. 연관관계 매핑
+
+**Entity Mapping**
+- Entity : JPA를 이용하여 데이터베이스 테이블과 매핑할 클래스
+- Entity Mapping : Entity Class에 데이터베이스 테이블과 컬럼, 기본 키, 외래 키 등을 설정하는 것
+
+
+**연관관계 매핑**
+
+> 관계형 데이터베이스에서는 Join을 통해 연관된 테이블을 참조하는 반면,    
+> Java에서는 객체 참조를 이용하여 연관된 엔터티를 참조하게 된다.
+
+- 데이터베이스의 테이블의 외래 키를 객체 참조와 매핑하는 것을 의미한다.
+
+**다중성(Multiplicity)**
+- @OneToOne
+- @OneToMany
+- @ManyToOne
+- @ManyToMany
+
+**방향성**
+- 단방향 (unidirectional)
+- 양방향 (bidirectional)
+
+
+**영속성 전이(persistence cascade)**
+
+
+_N:1 연관관계 매핑_
+```h2
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.Player */insert 
+    into
+        player (created_at, name, player_id) 
+    values
+        (?, ?, default)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player, type, player_detail_id) 
+    values
+        (?, ?, ?, default)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player, type, player_detail_id) 
+    values
+        (?, ?, ?, default)
+```
+
+정상적으로 Player Entity에 대한 데이터 저장 후  
+PlayerDetail Entity에 대한 저장이 이루어짐.
+
+_1:N 연관관계 매핑_
+```h2
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.Player */insert 
+    into
+        player (created_at, name, player_id) 
+    values
+        (?, ?, default)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player_id, type) 
+    values
+        (?, ?, ?)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player_id, type) 
+    values
+        (?, ?, ?)
+[Hibernate] 
+    update
+        player_detail 
+    set
+        player_id=? 
+    where
+        player_id=? 
+        and type=?
+[Hibernate] 
+    update
+        player_detail 
+    set
+        player_id=? 
+    where
+        player_id=? 
+        and type=?
+```
+
+로그를 살펴보면, Player ID에 대한 정보를 추가적으로 저장하기 위해, Update 쿼리가 발생하는 것을 확인할 수 있습니다.
+
+따라서 이러한 경우, 1:N 단방향 보다는 양방향으로 설정하여 이러한 문제를 방지하는 것이 좋다.
+
+_1:N -> 양방향 매핑 (@MapsId)를 한 경우_
+```h2
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.Player */insert 
+    into
+        player (created_at, name, player_id) 
+    values
+        (?, ?, default)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player_player_id, type) 
+    values
+        (?, ?, ?)
+[Hibernate] 
+    /* insert for
+        com.f1v3.jpa.domain.PlayerDetail */insert 
+    into
+        player_detail (description, player_player_id, type) 
+    values
+        (?, ?, ?)
+```
