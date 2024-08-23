@@ -1,10 +1,10 @@
 package com.f1v3.jpa;
 
 
-import com.f1v3.jpa.domain.Locker;
-import com.f1v3.jpa.domain.Member;
-import com.f1v3.jpa.repository.LockerRepository;
-import com.f1v3.jpa.repository.MemberRepository;
+import com.f1v3.jpa.test.domain.Locker;
+import com.f1v3.jpa.test.domain.Member;
+import com.f1v3.jpa.test.repository.LockerRepository;
+import com.f1v3.jpa.test.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

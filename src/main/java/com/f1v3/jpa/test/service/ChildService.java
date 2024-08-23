@@ -1,7 +1,7 @@
-package com.f1v3.jpa.service;
+package com.f1v3.jpa.test.service;
 
-import com.f1v3.jpa.domain.Child;
-import com.f1v3.jpa.repository.ChildRepository;
+import com.f1v3.jpa.test.domain.Child;
+import com.f1v3.jpa.test.repository.ChildRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

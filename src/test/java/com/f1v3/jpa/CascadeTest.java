@@ -1,6 +1,6 @@
 package com.f1v3.jpa;
 
-import com.f1v3.jpa.service.PlayerService;
+import com.f1v3.jpa.test.service.PlayerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
-package com.f1v3.jpa.service;
+package com.f1v3.jpa.test.service;
 
-import com.f1v3.jpa.domain.Player;
-import com.f1v3.jpa.domain.PlayerDetail;
-import com.f1v3.jpa.repository.PlayerDetailRepository;
-import com.f1v3.jpa.repository.PlayerRepository;
+import com.f1v3.jpa.test.domain.Player;
+import com.f1v3.jpa.test.domain.PlayerDetail;
+import com.f1v3.jpa.test.repository.PlayerDetailRepository;
+import com.f1v3.jpa.test.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

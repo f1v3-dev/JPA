@@ -1,9 +1,9 @@
 package com.f1v3.jpa;
 
-import com.f1v3.jpa.repository.ChildRepository;
-import com.f1v3.jpa.repository.ParentRepository;
-import com.f1v3.jpa.service.ChildService;
-import com.f1v3.jpa.service.ParentService;
+import com.f1v3.jpa.test.repository.ChildRepository;
+import com.f1v3.jpa.test.repository.ParentRepository;
+import com.f1v3.jpa.test.service.ChildService;
+import com.f1v3.jpa.test.service.ParentService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

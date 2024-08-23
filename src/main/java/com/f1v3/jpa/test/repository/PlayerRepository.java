@@ -1,6 +1,6 @@
-package com.f1v3.jpa.repository;
+package com.f1v3.jpa.test.repository;
 
-import com.f1v3.jpa.domain.Player;
+import com.f1v3.jpa.test.domain.Player;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

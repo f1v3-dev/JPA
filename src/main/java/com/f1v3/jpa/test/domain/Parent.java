@@ -1,4 +1,4 @@
-package com.f1v3.jpa.domain;
+package com.f1v3.jpa.test.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
