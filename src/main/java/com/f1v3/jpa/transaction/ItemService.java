@@ -63,8 +63,8 @@ public class ItemService {
 
         ItemEntity savedItem = itemRepository.save(item);
 
-        Boolean ret = secondService.readSample(savedItem.getId());
-        Boolean ret2 = secondService.unreadSample(savedItem.getId());
+        boolean ret = secondService.readSample(savedItem.getId());
+        boolean ret2 = secondService.unreadSample(savedItem.getId());
 
         log.info("readSample = {}", ret);
         log.info("unreadSample = {}", ret2);
