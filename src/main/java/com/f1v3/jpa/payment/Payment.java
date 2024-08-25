@@ -1,4 +1,4 @@
-package com.f1v3.jpa.transaction;
+package com.f1v3.jpa.payment;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -7,28 +7,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 돈을 가지고 있는 유저.
+ * 결제 엔티티.
  *
  * @author 정승조
  * @version 2024. 08. 23.
  */
 @Entity
-@Table(name = "users")
+@Table(name = "payments")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class User {
+public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "payment_id")
     private Long id;
 
-    @Column(nullable = false)
-    private Long money;
+    @Column(name = "payment_price")
+    private Long price;
 
     @Builder
-    public User(Long id, Long money) {
+    public Payment(Long id, Long price) {
         this.id = id;
-        this.money = money;
+        this.price = price;
     }
 }

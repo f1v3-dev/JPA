@@ -1,4 +1,4 @@
-package com.f1v3.jpa.transaction;
+package com.f1v3.jpa.payment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
